@@ -43,7 +43,7 @@
 %% title %%
 \title[\LaTeX{}]{\LaTeX{} 101}
 \subtitle{\LaTeX{} for absolute beginners}
-\author[ankursinha: FranciscoD]{Ankur Sinha @ Fedora}
+\author[ankursinha: FranciscoD]{Ankur Sinha (FranciscoD) @ Fedora}
 \date{January 10, 2019}
 
 %% document begins %%
@@ -92,7 +92,9 @@
       \begin{itemize}
         \item enables \href{https://en.wikipedia.org/wiki/Open_science}{Open Science}.
       \end{itemize}
+      \pause{}
     \item is available on Linux, MacOSX, and Windows.
+      \pause{}
     \item is easy to use (as you will see).
       \pause{}
     \item has minimum requirements:
@@ -235,13 +237,15 @@
     example-doc.out  example-doc.tex
     \end{minted}
   \end{figure}
+  \pause{}
   \begin{itemize}
     \item No PDF file?
   \end{itemize}
 \end{frame}
 \begin{frame}[fragile]{Generating the document: II}
   \begin{itemize}
-    \item The default output from \LaTeX{} is DVI (Device independent file format).
+    \item The default output from \LaTeX{} is \href{https://en.wikipedia.org/wiki/Device_independent_file_format}{DVI} (Device independent file format).
+      \pause{}
     \item But, PDF is most common now. So:
   \end{itemize}
   \begin{figure}[h]
@@ -295,15 +299,42 @@ right angled triangle respectively.
     \item Save, re-run \texttt{pdflatex}, view.
   \end{itemize}
 \end{frame}
+\begin{frame}[fragile]{More text structures}
+  \begin{itemize}
+    \item tables,
+    \item figures, subfigures,
+    \item headers, footers,
+    \item source code snippets,
+    \item algorithms,
+    \item theorems,
+    \item timelines,
+    \item margin comments,
+    \item indexes, glossaries,
+    \item \ldots
+  \end{itemize}
+\end{frame}
+\section{Citations and referencing}
 \begin{frame}[fragile]{Citations and referencing with BibTeX}
   \begin{itemize}
-    \item References are maintained in the BibTeX standard format:
+    \item Most standard publishers provide BibTeX citation information for their articles (so does \href{https://scholar.google.com/}{Google Scholar}).
+      \pause{}
+    \item A plethora of Free/Open source bibliography managers are available, almost all of which, support BibTeX\@:
+      \begin{itemize}
+        \item \href{http://www.jabref.org/}{JabRef}.
+        \item \href{http://wikindx.sourceforge.net/}{Wikindx} (Web based).
+        \item \href{https://en.wikipedia.org/wiki/Zotero}{Zotero} (Local and Web interfaces).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Citations and referencing with BibTeX II}
+  \begin{itemize}
+    \item An example BibTeX entry:
   \end{itemize}
   \begin{figure}[h]
     \centering
     \begin{minted}[fontsize=\footnotesize]{bibtex}
-% Save in a different file in the same directory
-% as the document as mybib.bib
+% Save as mybib.bib in the same directory
+% as the document
 @Misc{RedHat2008,
 author = {RedHat},
 title  = {Fedora Project},
@@ -314,17 +345,6 @@ year   = {2008},
     \end{minted}
   \end{figure}
 \end{frame}
-\begin{frame}[fragile]{Citations and referencing with BibTeX II}
-  \begin{itemize}
-    \item Most standard publishers provide BibTeX citation information for their articles (so does \href{https://scholar.google.com/}{Google Scholar}).
-    \item A plethora of Free/Open source bibliography managers are available, almost all of which, support BibTeX\@:
-      \begin{itemize}
-        \item \href{http://www.jabref.org/}{JabRef}.
-        \item \href{http://wikindx.sourceforge.net/}{Wikindx} (Web based).
-        \item \href{https://en.wikipedia.org/wiki/Zotero}{Zotero} (Local and Web interfaces).
-      \end{itemize}
-  \end{itemize}
-\end{frame}
 \begin{frame}[fragile]{Citations and referencing with BibTeX III}
   \begin{figure}[h]
     \centering
@@ -332,7 +352,7 @@ year   = {2008},
 % Cite a reference in the text:
 \section{A reference}
 The Fedora project community\cite{RedHat2008} is committed
-to promoting Free/Open source.
+to promoting the Free/Open source philosophy.
 
 % A list of citations
 \bibliographystyle{plain}
@@ -372,21 +392,23 @@ $ pdflatex example-doc && bibtex example-doc \
     && pdflatex example-doc && pdflatex example-doc
     \end{minted}
   \end{figure}
+  \pause{}
   \begin{itemize}
-    \item Tip: look at \href{https://mg.readthedocs.io/latexmk.html}{Latexmk} (Yes, it's available in Fedora).
+    \item Most IDEs permit setting up the complete chain of necessary commands.
+    \item Terminal users, try \href{https://mg.readthedocs.io/latexmk.html}{Latexmk} (Yes, it's available in Fedora).
   \end{itemize}
 \end{frame}
 \section{Collaborative writing}
 \begin{frame}[c]{Using Git/Github}
   \begin{itemize}
     \item Plaintext: multiple people can work on different parts of the text together.
-    \item Use the power of \href{http://phdcomics.com/comics/archive.php?comicid=1531}{version control}!
-    \item Can follow the standard pull request model used commonly in software development nowadays.
+    \item Use the power of \href{https://github.com/sanjayankur31/20190110-LaTeX-101/commits/master}{version control} (instead of \href{http://phdcomics.com/comics/archive.php?comicid=1531}{this}!)
+    \item Can follow the standard \alert{pull/merge} model.
       \pause{}
     \item A few tips:
       \begin{itemize}
-        \item Write each sentence on a new line: this helps git to merge easily, since git looks fir differences between lines.
-        \item Break the main text into smaller files using \texttt{include} or \texttt{input} commands\footnotemark.
+        \item Write \alert{each sentence on a new line}: this helps git to merge easily, since git looks fir differences between lines.
+        \item Break the main text into \alert{smaller files} using \texttt{include} or \texttt{input} commands\footnotemark.
       \end{itemize}
   \end{itemize}
   \footnotetext[6]{\href{https://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include}{Include vs input}}
@@ -413,6 +435,30 @@ $ pdflatex example-doc && bibtex example-doc \
   \end{figure}
 \end{frame}
 
+\section{Epilogue}
+\begin{frame}[c]{Common issues}
+  \begin{itemize}
+    \item It isn't WYSIWYG (what you see is what you get, like Word)
+      \begin{itemize}
+        \item That is the whole point: \alert{stop thinking about how it'll look}. \LaTeX{} will take care of that. Focus on writing the text!
+      \end{itemize}
+      \pause{}
+    \item Command writing is tedious!
+      \begin{itemize}
+        \item Use an IDE that provides \alert{completion}. If you write code, the same IDE that you use for programming will most probably also work for writing \LaTeX{}.
+      \end{itemize}
+      \pause{}
+    \item I don't know Git:
+      \begin{itemize}
+        \item Use \alert{Overleaf}: it provides a web interface where you don't need to use Git explicitly. (but learn Git if possible)
+      \end{itemize}
+      \pause{}
+    \item Error messages are \alert{hard to understand}:
+      \begin{itemize}
+        \item Remove bits of the text to isolate what is causing the error. If that doesn't work, \href{https://docs.fedoraproject.org/en-US/neurofedora/latex/\#_getting_help}{ask for help}.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
 \begin{frame}[c]{\LaTeX{} 101}
   \begin{center}
     \href{https://fedoraproject.org/wiki/Classroom}{fedoraproject.org/wiki/Classroom}\vspace{0.2cm}
