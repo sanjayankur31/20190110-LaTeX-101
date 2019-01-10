@@ -1,0 +1,427 @@
+%% Ankur Sinha
+\documentclass[usenames,dvipsnames]{beamer}
+
+%% packages %%
+% support for coloured text
+\usepackage{color}
+\usepackage[scale=2]{ccicons}
+\usepackage{amssymb}
+\usepackage{jneurosci}
+\usepackage{subfig}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+% Use opensans
+\usepackage[default,osfigures,scale=0.95]{opensans}
+% for strike through
+\usepackage[normalem]{ulem}
+% links, urls, refs
+\definecolor{links}{HTML}{2A1B81}
+% Fedora blue for the theme
+\definecolor{FedoraBlue}{HTML}{2A1B81}
+\usepackage{hyperref}
+\hypersetup{colorlinks,linkcolor=Green,urlcolor=links}
+% graphics
+\usepackage{graphicx}
+% algorithm
+\usepackage{textcomp}
+\usepackage{wrapfig}
+\usepackage{textgreek}
+\usepackage{euler}
+\usepackage{minted}
+
+% beamer theme
+% use defaults for theme
+\usetheme[numbering=fraction]{metropolis}
+\usefonttheme[onlymath]{serif}
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamerfont{caption}{size=\tiny}
+\setbeamercolor{alerted text}{fg=Green}
+
+% Not needed in metropolis, but in general footnote citation fixes: https://tex.stackexchange.com/questions/44217/how-can-i-stop-footcite-from-hijacking-my-beamer-columns
+% how to use multiple references to the same footnote: https://tex.stackexchange.com/questions/27763/beamer-multiple-references-to-the-same-footnote
+
+%% title %%
+\title[\LaTeX{}]{\LaTeX{} 101}
+\subtitle{\LaTeX{} for absolute beginners}
+\author[ankursinha: FranciscoD]{Ankur Sinha @ Fedora}
+\date{January 10, 2019}
+
+%% document begins %%
+\begin{document}
+
+% title frame %%
+\begin{frame}
+  \titlepage{}
+\end{frame}
+
+%% Three slides for 5 minutes seems good
+\section{Setup}
+\begin{frame}[c]{Before we begin}
+  \begin{itemize}
+    \item Please turn off your web cam, and mute your microphone.
+    \item Please install the required packages:\\ \texttt{sudo dnf install texlive-latex texlive-bibtex git}
+  \end{itemize}
+\end{frame}
+\section{\LaTeX{}?}
+\begin{frame}[c]{What is \LaTeX{}?}
+  \TeX{} (pronounced \emph{tech})\footnotemark:
+  \begin{itemize}
+    \item a \alert{typesetting} program:
+      \begin{itemize}
+        \item typesetting: formatting documents (articles, presentations, posters, pamphlets \ldots).
+        \item focusses on appearance, rather than structure/content.
+      \end{itemize}
+  \end{itemize}
+  \pause{}
+  \LaTeX{} (pronounced \emph{la-tech})\footnotemark:
+  \begin{itemize}
+    \item set of \alert{macros} (commands) built over \TeX{}:
+      \begin{itemize}
+        \item makes it easier to use, to quickly carry out common tasks.
+        \item lets the author focus on content.
+      \end{itemize}
+  \end{itemize}
+  \footnotetext[1]{\href{https://en.wikipedia.org/wiki/TeX\#Pronunciation_and_spelling}{Pronunciation of \TeX{}.}}
+  \footnotetext[2]{\href{http://www.tug.org/levels.html}{Levels of \TeX{}.}}
+\end{frame}
+
+\begin{frame}[c]{Why should one use \LaTeX{}?}
+  \LaTeX{}:
+  \begin{itemize}
+    \item is \href{https://u.fsf.org/user-liberation}{Free software}: it is free to use, share, modify, and study:
+      \begin{itemize}
+        \item enables \href{https://en.wikipedia.org/wiki/Open_science}{Open Science}.
+      \end{itemize}
+    \item is available on Linux, MacOSX, and Windows.
+    \item is easy to use (as you will see).
+      \pause{}
+    \item has minimum requirements:
+      \begin{itemize}
+        \item is written in \alert{plaintext}: so \alert{any} editor will do, and \alert{version control} can be used (git!),
+        \item required \LaTeX{} packages.
+      \end{itemize}
+      \pause{}
+    \item generates easy to read, clean documents\footnotemark.
+  \end{itemize}
+  \footnotetext[3]{This presentation is written in \LaTeX{}}
+\end{frame}
+\section{Using \LaTeX{}}
+\begin{frame}[c]{Requirements}
+  \begin{itemize}
+    \item a text editor, \alert{any} text editor\footnotemark: vim/emacs/gedit/atom/geany/\ldots{}.
+    \item \LaTeX{} packages.
+      \pause{}
+    \item IDEs speed up writing:
+      \begin{itemize}
+        \item \href{https://www.overleaf.com}{Overleaf} (web based).
+        \item \href{http://www.xm1math.net/texmaker/}{Texmaker}.
+        \item \href{https://www.lyx.org/}{LyX}.
+        \item Vim/Emacs/Atom/\ldots{} + plug-ins.
+      \end{itemize}
+  \end{itemize}
+  \footnotetext[4]{Microsoft Word is not an editor. It is a text processor---it does not generate plaintext as output.}
+\end{frame}
+\begin{frame}[fragile]{Document structure}
+  \begin{figure}
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+% Comments start with a %
+% Comment blocks are not supported!
+\documentclass{...}
+
+% This region is called the preamble.
+% Commands that setup the whole document go here.
+% Such as inclusion of packages.
+
+\begin{document}
+
+% The text of the document goes here.
+
+\end{document}
+% Anything here will not be processed.
+    \end{minted}
+  \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Document classes}
+  \begin{itemize}
+    \item standard layout for \LaTeX{} to use for the whole document.
+    \item classes are provided as \texttt{.cls} files.
+      \pause{}
+    \item standard classes:
+      \begin{itemize}
+        \item article.
+        \item report.
+        \item letter.
+        \item \ldots{}
+      \end{itemize}
+    \item packages provide more:
+      \begin{itemize}
+        \item beamer (used to make this presentation).
+      \end{itemize}
+  \end{itemize}
+  \pause{}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+% Let us write an article
+\documentclass[a4paper]{article}
+    \end{minted}
+  \end{figure}
+\end{frame}
+\begin{frame}[fragile]{The preamble}
+  \begin{itemize}
+    \item Commands for the whole document: commonly: inclusion of packages.
+      \begin{itemize}
+        \item Packages provide extra functionality\footnotemark.
+      \end{itemize}
+  \end{itemize}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+% Use Opensans fonts
+\usepackage[default,osfigures,scale=0.95]{opensans}
+% Use the hyperref packages for better links
+\usepackage{hyperref}
+% A title?
+\title{An example \LaTeX{} document}
+% The author?
+\author{A. Human}
+    \end{minted}
+  \end{figure}
+  \footnotetext[5]{\href{https://ctan.org/}{Search CTAN for packages, and documentation}}
+\end{frame}
+\begin{frame}[fragile]{The text!}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+% Let LaTeX format the title
+\maketitle
+% Some text?
+\LaTeX{} is easy!
+    \end{minted}
+  \end{figure}
+\end{frame}
+\begin{frame}[fragile]{The source file so far}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+% Filename: example-doc.tex
+\documentclass[a4paper]{article}
+\usepackage[default,osfigures,scale=0.95]{opensans}
+\usepackage{hyperref}
+
+\title{An example \LaTeX{} document}
+\author{A. Human}
+
+\begin{document}
+\maketitle
+
+\LaTeX{} is easy!
+
+\end{document}
+    \end{minted}
+  \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Generating the document: I}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{console}
+    $ ls
+    example-doc.tex
+    $ latex example-doc
+    ...
+    $ ls
+    example-doc.aux  example-doc.dvi  example-doc.log
+    example-doc.out  example-doc.tex
+    \end{minted}
+  \end{figure}
+  \begin{itemize}
+    \item No PDF file?
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Generating the document: II}
+  \begin{itemize}
+    \item The default output from \LaTeX{} is DVI (Device independent file format).
+    \item But, PDF is most common now. So:
+  \end{itemize}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{console}
+    $ pdflatex example-doc
+    ...
+    $ ls
+    example-doc.aux  example-doc.dvi  example-doc.log
+    example-doc.out  example-doc.pdf  example-doc.tex
+    \end{minted}
+  \end{figure}
+  \begin{itemize}
+    \item View it with your favourite PDF viewer (Evince/Okular/Adobe/Zathura/\ldots{})
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Text structures: sections, lists}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+\section{Our first section}
+This is a new section.
+
+\subsection{Lists}
+\begin{itemize}
+  \item An itemised list!
+\end{itemize}
+
+\begin{enumerate}
+  \item A numbered list
+\end{enumerate}
+    \end{minted}
+  \end{figure}
+  \begin{itemize}
+    \item Save, re-run \texttt{pdflatex}, view.
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Text structures: mathematics}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+\begin{equation}
+  h^2 = b^2 + p^2
+\end{equation}
+where \(h\), \(b\), and \(p\) are the lengths of the
+hypotenuse, the base, and the perpendicular of a
+right angled triangle respectively.
+    \end{minted}
+  \end{figure}
+  \begin{itemize}
+    \item Save, re-run \texttt{pdflatex}, view.
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Citations and referencing with BibTeX}
+  \begin{itemize}
+    \item References are maintained in the BibTeX standard format:
+  \end{itemize}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{bibtex}
+% Save in a different file in the same directory
+% as the document as mybib.bib
+@Misc{RedHat2008,
+author = {RedHat},
+title  = {Fedora Project},
+date   = {2008},
+year   = {2008},
+}
+
+    \end{minted}
+  \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Citations and referencing with BibTeX II}
+  \begin{itemize}
+    \item Most standard publishers provide BibTeX citation information for their articles (so does \href{https://scholar.google.com/}{Google Scholar}).
+    \item A plethora of Free/Open source bibliography managers are available, almost all of which, support BibTeX\@:
+      \begin{itemize}
+        \item \href{http://www.jabref.org/}{JabRef}.
+        \item \href{http://wikindx.sourceforge.net/}{Wikindx} (Web based).
+        \item \href{https://en.wikipedia.org/wiki/Zotero}{Zotero} (Local and Web interfaces).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Citations and referencing with BibTeX III}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+% Cite a reference in the text:
+\section{A reference}
+The Fedora project community\cite{RedHat2008} is committed
+to promoting Free/Open source.
+
+% A list of citations
+\bibliographystyle{plain}
+\bibliography{mybib}
+    \end{minted}
+  \end{figure}
+  \begin{itemize}
+    \item Save, re-run \texttt{pdflatex}, view.
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Citations and referencing with BibTeX IV}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{console}
+$ pdflatex example-doc
+LaTeX Warning: There were undefined references.
+    \end{minted}
+  \end{figure}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{20180110-latex-101-bibtex.png}
+  \end{figure}
+\end{frame}
+\begin{frame}[fragile]{Citations and referencing with BibTeX V}
+  \begin{itemize}
+    \item Multiple passes are needed to generate the document. Simply:
+      \begin{itemize}
+        \item the locations of the citations are stored in the first pass,
+        \item the bibliography is processed next,
+        \item the locations are completed with the required text.
+      \end{itemize}
+  \end{itemize}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+$ pdflatex example-doc && bibtex example-doc \
+    && pdflatex example-doc && pdflatex example-doc
+    \end{minted}
+  \end{figure}
+  \begin{itemize}
+    \item Tip: look at \href{https://mg.readthedocs.io/latexmk.html}{Latexmk} (Yes, it's available in Fedora).
+  \end{itemize}
+\end{frame}
+\section{Collaborative writing}
+\begin{frame}[c]{Using Git/Github}
+  \begin{itemize}
+    \item Plaintext: multiple people can work on different parts of the text together.
+    \item Use the power of \href{http://phdcomics.com/comics/archive.php?comicid=1531}{version control}!
+    \item Can follow the standard pull request model used commonly in software development nowadays.
+      \pause{}
+    \item A few tips:
+      \begin{itemize}
+        \item Write each sentence on a new line: this helps git to merge easily, since git looks fir differences between lines.
+        \item Break the main text into smaller files using \texttt{include} or \texttt{input} commands\footnotemark.
+      \end{itemize}
+  \end{itemize}
+  \footnotetext[6]{\href{https://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include}{Include vs input}}
+\end{frame}
+\begin{frame}[c,fragile]{Using Git/Github II}
+  \begin{figure}[h]
+    \centering
+    \begin{minted}[fontsize=\footnotesize]{latex}
+\begin{document}
+% Let LaTeX format the title
+\maketitle
+% The text of the document goes here.
+
+% sections in different files
+\input{section1}
+\input{section2}
+\input{section3}
+
+\bibliographystyle{plain}
+\bibliography{mybib}
+
+\end{document}
+    \end{minted}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[c]{\LaTeX{} 101}
+  \begin{center}
+    \href{https://fedoraproject.org/wiki/Classroom}{fedoraproject.org/wiki/Classroom}\vspace{0.2cm}
+
+    \href{https://docs.fedoraproject.org/en-US/neurofedora/latex/}{docs.fedoraproject.org/en-US/neurofedora/latex/}\vspace{0.2cm}
+
+    \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons Attribution-ShareAlike 4.0 International License}.\vspace{0.2cm}
+
+    \ccbysa{}
+  \end{center}
+\end{frame}
+\end{document}
