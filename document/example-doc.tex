@@ -1,0 +1,29 @@
+% Filename: example-doc.tex
+% Comments start with a %
+% Comment blocks are not supported!
+% Let us write an article
+\documentclass[a4paper]{article}
+
+% Use Opensans fonts
+\usepackage[default,osfigures,scale=0.95]{opensans}
+% Use the hyperref packages for better links
+\usepackage{hyperref}
+
+% A title?
+\title{An example \LaTeX{} document}
+\author{A. Human}
+
+\begin{document}
+% Let LaTeX format the title
+\maketitle
+% The text of the document goes here.
+
+\input{section1}
+\input{section2}
+\input{section3}
+
+\bibliographystyle{plain}
+\bibliography{mybib}
+
+\end{document}
+% Anything here will not be processed.
